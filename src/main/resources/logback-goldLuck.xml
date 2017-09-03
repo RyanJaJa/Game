@@ -1,0 +1,8 @@
+<included>      
+	<logger name="com.exec" additivity="false">
+		<level value="${logging.level}" />
+      <appender-ref ref="dailyRollingFileAppender" />
+		<appender-ref ref="minuteRollingFileAppender" />
+		<appender-ref ref="consoleAppender" />
+	</logger>
+</included>

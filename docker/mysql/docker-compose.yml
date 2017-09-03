@@ -1,0 +1,9 @@
+goldluck-mariadb:
+  image: mariadb
+  command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  container_name: goldluck-mariadb
+  environment:
+    - MYSQL_ROOT_PASSWORD=ro@t
+    - MYSQL_DATABASE=goldluck
+  ports:
+    - 3316:3306

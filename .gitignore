@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gradle
+.idea
+*.iml
+*.log
+**/.DS_Store
+/.idea/
+/app.log.folder_IS_UNDEFINED/
+/out/
+/build/

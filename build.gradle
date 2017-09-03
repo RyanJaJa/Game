@@ -1,0 +1,63 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.4.RELEASE'
+        slf4jVersion = '1.7.24'
+        tilesVersion = '3.0.7'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mobile', version: springBootVersion
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.6.0'
+    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+    // slf4j
+    compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: slf4jVersion
+    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
+    // Guava
+    compile group: 'com.google.guava', name: 'guava', version: '21.0'
+    // Apache
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
+    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+    compile group: 'org.apache.poi', name: 'poi', version: '3.15'
+    // Java Mail
+    compile group: 'com.sun.mail', name: 'javax.mail', version: '1.5.6'
+    compile group: 'javax.mail', name: 'javax.mail-api', version: '1.5.6'
+
+    // 3rd Part
+    // Glassfish
+    compile group: 'org.glassfish', name: 'javax.json', version: '1.0.4'
+    // Apache httpcomponents
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.0'
+    compile group: 'com.google.guava', name: 'guava', version: '23.0'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
+    
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.security:spring-security-test')
+}

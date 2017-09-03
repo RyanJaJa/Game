@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>         
+   <!-- 必須指定 app.log.folder 環境變數，該變數用於設定日誌檔位置 -->
+   <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder>
+         <Pattern>%-30(%d{yyyy-MM-dd-HH:mm:ss.SSS} [%thread]) %highlight(%-5level) %blue(%logger{35}) - %msg %n
+         </Pattern>
+      </encoder>
+      <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+         <level>TRACE</level>
+      </filter>
+   </appender>
+   
+   <appender name="dailyRollingFileAppender"
+      class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <File>${app.log.folder}/${spring.application.name}.${spring.profiles.active}.log</File>
+      <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+         <!-- daily rollover -->
+         <FileNamePattern>${spring.application.name}.${spring.profiles.active}.%d{yyyy-MM-dd}.log</FileNamePattern>
+
+         <!-- keep 30 days' worth of history -->
+         <maxHistory>30</maxHistory>
+      </rollingPolicy>
+
+      <encoder>
+         <Pattern>%-30(%d{yyyy-MM-dd-HH:mm:ss.SSS} [%thread]) %-5level %logger{36} - %msg %n
+         </Pattern>
+      </encoder>
+   </appender>
+   <appender name="minuteRollingFileAppender"
+      class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+         <!-- rollover every minute -->
+         <FileNamePattern>${app.log.folder}/${spring.application.name}.${spring.profiles.active}.%d{yyyy-MM-dd_HH-mm}.log
+         </FileNamePattern>
+
+         <!-- keep 30 minutes' worth of history -->
+         <maxHistory>30</maxHistory>
+      </rollingPolicy>
+
+      <encoder>
+         <Pattern>%-30(%-4relative [%thread]) %-5level %logger{36} - %msg %n
+         </Pattern>
+      </encoder>
+   </appender>   
+   
+   <root>
+      <level value="INFO" />
+      <appender-ref ref="consoleAppender" />
+   </root>
+      
+   <logger name="org.springframework" additivity="false">
+      <level value="INFO" />
+      <appender-ref ref="dailyRollingFileAppender" />
+      <appender-ref ref="consoleAppender" />
+   </logger> 
+   
+   <logger name="org.springframework.cloud" additivity="false">
+      <level value="INFO" />
+      <appender-ref ref="dailyRollingFileAppender" />
+      <appender-ref ref="consoleAppender" />
+   </logger>
+   
+   <logger name="org.springframework.integration.handler.LoggingHandler" additivity="false">
+      <level value="INFO" />
+      <appender-ref ref="dailyRollingFileAppender" />
+      <appender-ref ref="consoleAppender" />
+   </logger>
+   
+   <logger name="org.hibernate" additivity="false">
+      <level value="INFO" />
+      <appender-ref ref="dailyRollingFileAppender" />
+      <appender-ref ref="consoleAppender" />
+   </logger>
+   
+   <logger name="org.hibernate.SQL" additivity="false">
+      <level value="INFO" />
+      <appender-ref ref="dailyRollingFileAppender" />
+      <appender-ref ref="consoleAppender" />
+   </logger>
+   
+   <logger name="org.hibernate.type" additivity="false">
+      <level value="INFO" />
+      <appender-ref ref="dailyRollingFileAppender" />
+      <appender-ref ref="consoleAppender" />
+   </logger>
+   
+   <include resource="logback-goldLuck.xml" />
+</configuration>
